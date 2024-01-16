@@ -12,7 +12,8 @@ const props = defineProps({
 
 const form = useForm({
     name: '',
-    parent_id: ''
+    parent_id: '',
+    discount: 0
 });
 
 const submit = () => {
@@ -98,6 +99,25 @@ const getIndentation = (level) => {
                                     class="text-sm text-red-600"
                                 >
                                     {{ form.errors.name }}
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label
+                                    for="discount"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Discount</label>
+                                <input
+                                    type="number"
+                                    v-model="form.discount"
+                                    name="discount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder=""
+                                />
+                                <div
+                                    v-if="form.errors.discount"
+                                    class="text-sm text-red-600"
+                                >
+                                    {{ form.errors.discount }}
                                 </div>
                             </div>
                             <button
