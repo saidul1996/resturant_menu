@@ -93,7 +93,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'parent_id' => 'required|exists:categories,id',
+            'parent_id' => 'nullable|exists:categories,id',
             'name' => 'required|string|max:255',
             'discount' => 'nullable|numeric|min:0'
         ]);

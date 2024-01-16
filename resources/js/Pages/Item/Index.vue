@@ -19,6 +19,7 @@ function destroy(id) {
         form.delete(route('item.destroy', id));
     }
 }
+
 </script>
 
 <template>
@@ -116,7 +117,7 @@ function destroy(id) {
                                             scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                                         >
-                                            {{ item.discount+'%' }}
+                                            {{ item.inherited_discount+'%' }}
                                         </th>
 
                                         <td class="px-6 py-4">
