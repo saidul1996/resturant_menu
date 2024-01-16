@@ -71,6 +71,9 @@ function destroy(id) {
                                             Price
                                         </th>
                                         <th scope="col" class="px-6 py-3">
+                                            Discount
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
                                             Action
                                         </th>
                                     </tr>
@@ -107,6 +110,13 @@ function destroy(id) {
                                             class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
                                         >
                                             {{ item.price }}
+                                        </th>
+
+                                        <th
+                                            scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+                                        >
+                                            {{ item.discount+'%' }}
                                         </th>
 
                                         <td class="px-6 py-4">
