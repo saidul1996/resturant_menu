@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::with('childrens.childrens')->whereNull('parent_id')->get();
 
         return Inertia::render(
             'Category/Create',
@@ -50,6 +50,9 @@ class CategoryController extends Controller
 
         try {
             $parent = Category::find($validated['parent_id']);
+
+            if ($parent->level == 4) return redirect()->route('category.create')->with('message', 'Sorry, Only Possible Up To 4 Level!');
+
             $validated['level'] = $parent ? $parent->level + 1 : 1;
             Category::create($validated);
             return redirect()->route('category.index')->with('message', 'Category Created Successfully');
@@ -72,10 +75,13 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $categories = Category::with('childrens.childrens.childrens')->whereNull('parent_id')->get();
+
         return Inertia::render(
             'Category/Edit',
             [
-                'category' => $category
+                'category' => $category,
+                'categories' => $categories
             ]
         );
     }
@@ -86,12 +92,17 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
+            'parent_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255'
         ]);
 
-        $category->update($validated);
-
-        return redirect()->route('category.index')->with('message', 'Category Updated Successfully');
+        try {
+            $category->update($validated);
+            return redirect()->route('category.index')->with('message', 'Category Updated Successfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->route('category.index')->with('message', 'Something Went Wrong!');
+        }
     }
 
     /**
