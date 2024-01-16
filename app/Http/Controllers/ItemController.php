@@ -29,7 +29,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::with('childrens.childrens.childrens')->whereNull('parent_id')->get();
 
         return Inertia::render(
             'Item/Create',
@@ -72,7 +72,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $categories = Category::all();
+        $categories = Category::with('childrens.childrens.childrens')->whereNull('parent_id')->get();
         return Inertia::render(
             'Item/Edit',
             [

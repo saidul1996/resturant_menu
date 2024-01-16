@@ -20,6 +20,26 @@ const form = useForm({
 const submit = () => {
     form.post(route("item.store"));
 };
+
+const recursiveCategories = (categories, level = 1) => {
+  let result = [];
+  for (const category of categories) {
+    result.push({
+      ...category,
+      name: getIndentation(level) + category.name
+    });
+    if (category.childrens && Array.isArray(category.childrens)) {
+      result = result.concat(recursiveCategories(category.childrens, level + 1));
+    } else if (category.childrens) {
+      result.push(...recursiveCategories([category.childrens], level + 1));
+    }
+  }
+  return result;
+};
+
+const getIndentation = (level) => {
+  return Array(level).fill('    ').join('');
+};
 </script>
 
 <template>
@@ -51,7 +71,10 @@ const submit = () => {
                                     placeholder="">
 
                                     <option value="" disabled>Select a category</option>
-                                    <option v-for="category in categories" :key="category.id" :value="category.id">
+                                    <option v-for="category in recursiveCategories(categories)" :key="category.id" :value="category.id">
+                                        <span v-if="category.level==2">&nbsp;-</span>
+                                        <span v-if="category.level==3">&nbsp;--</span>
+                                        <span v-if="category.level==4">&nbsp;---</span>
                                         {{ category.name }}
                                     </option>
                                 </select>
