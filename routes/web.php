@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('item', ItemController::class);
     Route::get('menu', MenuController::class)->name('menu.index');
+    Route::resource('discount', DiscountController::class)->only(['create', 'store']);
 });
 
 require __DIR__ . '/auth.php';
