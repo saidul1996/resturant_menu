@@ -24,34 +24,20 @@ function destroy(id) {
 
 <template>
 
-  <Head title="Items" />
+  <Head title="Menus" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Item Index
+                Menus (With Inherited Discount)
             </h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    v-if="$page.props.flash && $page.props.flash.message"
-                    class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                    role="alert"
-                >
-                    <span class="font-medium">
-                        {{ $page.props.flash.message }}
-                    </span>
-                </div>
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <div class="mb-2">
-                            <Link :href="route('item.create')">
-                                <BreezeButton>Add Item</BreezeButton></Link
-                            >
-                        </div>
-                         <div
+                        <div
                             class="relative overflow-x-auto shadow-md sm:rounded-lg"
                         >
                             <table
@@ -68,14 +54,17 @@ function destroy(id) {
                                         <th scope="col" class="px-6 py-3">
                                             Category
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Price
+                                        <th scope="col" class="px-6 py-3 text-end">
+                                            Regular Price
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-6 py-3 text-end">
                                             Discount (%)
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Action
+                                        <th scope="col" class="px-6 py-3 text-end">
+                                            Discount Amount
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-end">
+                                            Discounted Price
                                         </th>
                                     </tr>
                                 </thead>
@@ -108,35 +97,31 @@ function destroy(id) {
 
                                         <th
                                             scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-end"
                                         >
                                             {{ item.price }}
                                         </th>
 
                                         <th
                                             scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-end"
                                         >
-                                            {{ item.discount+'%' }}
+                                            {{ item.inherited_discount+'%' }}
                                         </th>
 
-                                        <td class="px-6 py-4">
-                                            <Link
-                                                :href="
-                                                    route(
-                                                        'item.edit',
-                                                        item.id
-                                                    )
-                                                "
-                                               class="px-4 py-2 text-white bg-blue-600 rounded-lg mx-1" >Edit</Link
-                                            >
-                                            <BreezeButton
-                                                class="bg-red-700 mx-1"
-                                                @click="destroy(item.id)"
-                                            >
-                                                Delete
-                                            </BreezeButton>
-                                        </td>
+                                        <th
+                                            scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-end"
+                                        >
+                                            {{ (item.price/100)*item.inherited_discount }}
+                                        </th>
+
+                                        <th
+                                            scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-end"
+                                        >
+                                            {{ item.price-(item.price/100)*item.inherited_discount }}
+                                        </th>
                                     </tr>
                                 </tbody>
                             </table>
