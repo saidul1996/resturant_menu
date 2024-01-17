@@ -86,7 +86,7 @@ const getIndentation = (level) => {
                                 <label
                                     for="Name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                >Name</label>
+                                >Name<span class="text-red-600">*</span></label>
                                 <input
                                     type="text"
                                     v-model="form.name"

@@ -68,7 +68,7 @@ const getIndentation = (level) => {
                                 <label
                                     for="categoryId"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >Select Category</label
+                                    >Select Category<span class="text-red-600">*</span></label
                                 >
                                 <select 
                                     v-model="form.category_id" 
@@ -96,7 +96,7 @@ const getIndentation = (level) => {
                                 <label
                                     for="Name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >Name</label
+                                    >Name<span class="text-red-600">*</span></label
                                 >
                                 <input
                                     type="text"
@@ -116,7 +116,7 @@ const getIndentation = (level) => {
                                 <label
                                     for="price"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    >Price</label
+                                    >Price<span class="text-red-600">*</span></label
                                 >
                                 <input
                                     type="text"
