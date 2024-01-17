@@ -52,7 +52,7 @@ defineProps({
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
                 <div class="container mx-auto p-8">
-                    <img src="https://img.freepik.com/free-vector/cafe-terrace-with-welcome-message_23-2147503932.jpg" alt="">
+                    <img src="/welcome-img.png" alt="Welcome Image" class="mb-4 w-full rounded-lg">
                     <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6 text-center my-10">
                         Welcome to Our Restaurant Menu
                     </h1>
